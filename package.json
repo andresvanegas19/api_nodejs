@@ -1,0 +1,19 @@
+{
+  "name": "api_nodejs_docker",
+  "version": "1.0.0",
+  "description": "This repository is dedicate to bring service to the portafolio using tecnolgies like javascript and docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./node_modules/.bin/nodemon"
+  },
+  "author": "andres reyes",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
