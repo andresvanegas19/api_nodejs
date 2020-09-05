@@ -6,13 +6,13 @@ services:
     working_dir: '/home/core-api'
     volumes:
       - ./:/home/core-api
-		command: "sh -c 'npm install && npm run dev'"
-		depends_on:
-			- core-db
+    command: "sh -c 'npm install && npm run dev'"
+    depends_on:
+      - core-db
     environment:
       NODE_ENV: development
     ports:
-			- 3000:3000
+      - 3000:3000
 
-	core-db:
-		image: 'mongo:4'
+  core-db:
+    image: 'mongo:4'

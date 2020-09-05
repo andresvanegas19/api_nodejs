@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
 const uuid = require('uuid/v4')
 
-const User = new mongoose.Schema({
+const Item = new mongoose.Schema({
     _id: {
         type: String,
         default: uuid()
     },
-    username: String,
+    itemType: String,
+    content: mongoose.SchemaTypes.Mixed,
+    creator: {
+        type: String,
+        ref: "User"
+    },
     perferences: mongoose.SchemaType.Mixed
 })
-
-module.exports = mongoose.model('User', User)
