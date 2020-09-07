@@ -1,7 +1,11 @@
 const router = require('express').Router()
+const Item = require('../../models/Item')
 
 router.get('/', (req, res, next) => {
-    return res.status(200).json({msg: 'User end point'})
+    Item.find()
+    .then(items =>{
+       return res.status(200).json(items)
+    })
 })
 
 

@@ -1,8 +1,16 @@
 const router = require('express').Router()
+const Item = require('../../models/Item')
 
-router.get('/', (req, res, next) => {
-    return res.status(200).json({msg: 'User end point'})
+
+router.put('/:id', (req, res, next) =>  {
+    Item.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+        .then(updatedItem =>{
+            res.status(200).json(updatedItem)
+        })
+        .catch(err => {
+            console.log('erro updateing Item:', err)
+            return res.status(500).json({msg: "Failed to update"})
+        })
 })
-
 
 module.exports = router

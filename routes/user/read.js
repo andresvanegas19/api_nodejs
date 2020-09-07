@@ -1,7 +1,11 @@
 const router = require('express').Router()
+const User = require('../../models/User')
 
 router.get('/', (req, res, next) => {
-    return res.status(200).json({msg: 'User end point'})
+    User.find()
+        .then(users =>{
+            return res.status(200).json(users)
+        })
 })
 
 
