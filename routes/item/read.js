@@ -7,6 +7,15 @@ router.get('/', (req, res, next) => {
        return res.status(200).json(items)
     })
 })
-
+router.get('/:id', (req, res, next) => {
+    Item.findOne({_id: req.params.id})
+        .then(item =>{
+            return res.status(200).json(item)
+        })
+        .catch(err => {
+            console.log('error finding item:', err)
+            return res.status(500).json({ msg: "no user found"})
+        })
+})
 
 module.exports = router

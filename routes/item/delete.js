@@ -1,7 +1,16 @@
 const router = require('express').Router()
+const Item = require('../../models/Item')
 
-router.get('/', (req, res, next) => {
-    return res.status(200).json({msg: 'User end point'})
+router.delete('/:id', (req, res, next) => {
+    Item.findByIdAndDelete(req.params.id)
+        .then(result=>{
+            console.log('delete result:', result)
+            return res.status(204).json()
+        })
+        .catch(err=>{
+            console.log('error deleting item', err)
+            return res.status(500).json({msg: "error deletign"})
+        })
 })
 
 
