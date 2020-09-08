@@ -2,6 +2,10 @@
 
 GET http://127.0.0.1:3000/api/user HTTP/1.1
 ###
+GET http://127.0.0.1:3000/api/user?page=5 HTTP/1.1
+###
+GET http://127.0.0.1:3000/api/user?sortBy=createdAt&orderBy=desc HTTP/1.1
+###
 GET http://127.0.0.1:3000/api/item HTTP/1.1
 ###
 GET http://127.0.0.1:3000/api/item/40e2061f-520e-448f-a131-60018f88ffe0 HTTP/1.1

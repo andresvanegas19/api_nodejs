@@ -6,6 +6,7 @@ router.get('/', (req, res, next) => {
     // This is for the page start to the 1 not to the 0
     const currentPage = req.query.page > 0 ? req.query.page - 1 : 0
     const sortBy = req.query.sortBy || 'username'
+    // order in ascending order the query
     const orderBy = req.query.orderBy || 'asc'
 
     // this is for the order the query
