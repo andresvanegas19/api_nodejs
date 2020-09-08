@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const User = require('../../models/User')
+const validator = require('validator')
+
 
 router.get('/', (req, res, next) => {
     const pageSize = 20
