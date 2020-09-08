@@ -12,6 +12,7 @@ const Item = new mongoose.Schema({
     type: String,
     ref: "User"
   }
-})
+}, {timestamps: true})
+
 
 module.exports = mongoose.model('Item', Item)

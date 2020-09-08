@@ -16,7 +16,7 @@ POST http://127.0.0.1:3000/api/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "Parties"
+    "username": "penssssaaaaaaaa"
 }
 
 ###
@@ -64,7 +64,7 @@ Content-Type: application/json
 ###
 DELETE http://127.0.0.1:3000/api/item/473dd7ae-a7b4-452e-8310-3c5c16142dd4 HTTP/1.1
 
-### 
+###
 
 
 DELETE http://127.0.0.1:3000/api/user/32ae3e4c-a3db-4c4b-aa3d-3582afbc82f9 HTTP/1.1

@@ -2,9 +2,38 @@ const router = require('express').Router()
 const User = require('../../models/User')
 
 router.get('/', (req, res, next) => {
-    User.find()
-        .then(users =>{
-            return res.status(200).json(users)
+    const pageSize = 20
+    // This is for the page start to the 1 not to the 0
+    const currentPage = req.query.page > 0 ? req.query.page - 1 : 0
+    const sortBy = req.query.sortBy || 'username'
+    const orderBy = req.query.orderBy || 'asc'
+
+    // this is for the order the query
+    const sortQuery = {
+        [sortBy]: orderBy
+    }
+
+
+    User.count()
+        .then(userCount => {
+            if (currentPage * pageSize > userCount)
+            {
+                // this is for return the json with 0 json because the page pass
+                // the restriction and the data has the mongoose db
+                return res.status(400).json([])
+            }
+            User.find()
+                .limit(pageSize)
+                .skip(currentPage * pageSize)
+                .sort(sortQuery)
+                .then(users => {
+                    return res.status(200).json({
+                        users,
+                        page: req.query.page || 1,
+                        total: userCount,
+                        pageSize: pageSize
+                    })
+                })
         })
 })
 
