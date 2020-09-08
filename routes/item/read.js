@@ -10,17 +10,38 @@ router.get('/', (req, res, next) => {
         [sortBy]: orderBy
     }
 
-    Item.count()
+    const filter = req.query.filter || ''
+    const filterOn = req.query.filterOn || ''
+    let filterQuery = {}
+    if (filter.length > 0)
+    {
+        const regx = new RegExp(filter, 'i')
+        // This is for check if where filter the parameters
+        if (filterOn.length > 0)
+        {
+            filterQuery = {
+                [filterOn]: regx
+            }
+        }
+        else
+        {
+            filterQuery = {
+                content: regx
+            }
+        }
+    }
+
+    Item.countDocuments(filterQuery)
         .then(itemCount => {
             if (currentPage * pageSize > itemCount)
             {
                 return res.status(400).json([])
             }
-            Item.find()
+            Item.find(filterQuery)
                 .limit(pageSize)
                 .skip(currentPage * pageSize)
                 .sort(sortQuery)
-                .then(item => {
+                .then(items => {
                     return res.status(200).json({
                         items,
                         page: req.query.page || 1,
@@ -28,6 +49,10 @@ router.get('/', (req, res, next) => {
                         pageSize: pageSize
                     })
                 })
+        })
+        .catch(err => {
+            console.log('error finding item:', err)
+            return res.status(500).json({ msg: "no user found"})
         })
 })
 

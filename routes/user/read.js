@@ -8,14 +8,17 @@ router.get('/', (req, res, next) => {
     const sortBy = req.query.sortBy || 'username'
     // order in ascending order the query
     const orderBy = req.query.orderBy || 'asc'
-
     // this is for the order the query
     const sortQuery = {
         [sortBy]: orderBy
     }
 
+    const filter = req.query.filter || ''
+    const filterQuery = {
+        username: new RegExp(filter, 'i')
+    }
 
-    User.count()
+    User.countDocuments(filterQuery)
         .then(userCount => {
             if (currentPage * pageSize > userCount)
             {
@@ -23,7 +26,7 @@ router.get('/', (req, res, next) => {
                 // the restriction and the data has the mongoose db
                 return res.status(400).json([])
             }
-            User.find()
+            User.find(filterQuery)
                 .limit(pageSize)
                 .skip(currentPage * pageSize)
                 .sort(sortQuery)
@@ -35,6 +38,10 @@ router.get('/', (req, res, next) => {
                         pageSize: pageSize
                     })
                 })
+        })
+        .catch(err => {
+            console.log('error finding user:', err)
+            return res.status(500).json({ msg: "no user found"})
         })
 })
 
