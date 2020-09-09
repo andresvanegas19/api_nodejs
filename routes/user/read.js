@@ -59,13 +59,13 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
-    const userId = validator.scape(req.params.id)
+    const userId = validator.escape(req.params.id)
     if (!validator.isUUID(userId))
     {
         return res.status(400).json({msg: "Invalid Id"})
     }
 
-    User.findOne({_id: userId})
+    User.findOne({_id: req.params.id})
         .then(user =>{
             return res.status(200).json(user)
         })

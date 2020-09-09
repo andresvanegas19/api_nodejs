@@ -4,7 +4,7 @@ const validator = require('validator')
 
 
 router.put('/:id', (req, res, next) =>  {
-    const itemId = validator.scape(req.params.id)
+    const itemId = validator.escape(req.params.id)
     if (!validator.isUUID(itemId))
     {
         return res.status(400).json({msg: "Invalid Id"})

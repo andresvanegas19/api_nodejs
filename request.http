@@ -29,6 +29,9 @@ GET http://127.0.0.1:3000/api/item?sortBy=createAt&orderBy=-1 HTTP/1.1
 GET http://127.0.0.1:3000/api/item/40e2061f-520e-448f-a131-60018f88ffe0 HTTP/1.1
 ###
 
+those not works
+
+###
 GET http://127.0.0.1:3000/api/user/bd757793-c6ca44b6-be8f-ec6230783b6a HTTP/1.1
 Content-Type: application/json
 ###
@@ -68,9 +71,8 @@ Content-Type: application/json
 
 ###
 
-PUT http://127.0.0.1:3000/api/user/95293fa4-0cf0-49e4-b5e1-830ffdb3f36c HTTP/1.1
+PUT http://127.0.0.1:3000/api/user/0f171519-a977-4e74-b5dd-39659a8c1f78 HTTP/1.1
 Content-Type: application/json
-
 {
   "_id": "bf48eba3-f1b3-4cf4-af15-1676aaa111e7",
   "username": "Parties",
@@ -99,5 +101,15 @@ DELETE http://127.0.0.1:3000/api/item/473dd7ae-a7b4-452e-8310-3c5c16142dd4 HTTP/
 ###
 
 
-DELETE http://127.0.0.1:3000/api/user/32ae3e4c-a3db-4c4b-aa3d-3582afbc82f9 HTTP/1.1
+DELETE http://127.0.0.1:3000/api/user/b5563466-94a8-423e-8545-8403986e2847 HTTP/1.1
 
+###
+
+POST http://127.0.0.1:3000/api/item HTTP/1.1
+Content-Type: application/json
+
+{
+    "itemType": "Gasthe",
+    "content": "aaaathe",
+    "creator": "72ae8f1d-643b-483f-874b-2d48d0041183"
+}
