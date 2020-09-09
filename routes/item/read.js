@@ -1,17 +1,28 @@
 const router = require('express').Router()
 const Item = require('../../models/Item')
+const validator = require('validator')
 
 router.get('/', (req, res, next) => {
     const pageSize = 20
-    const currentPage = req.query.page > 0 ? req.query.page - 1 : 0
-    const sortBy = req.query.sortBy || 'createdAt'
-    const orderBy = req.query.orderBy || 'asc'
+
+    // avoid to malisios query into the api
+    const escpQuery = Object.assign({},
+        // copies all enumerable own properties from one or more
+        // source objects to a target object. It returns the target object.
+        ...Object.keys(req.query).map(obKey => {
+            return {[obKey]: validator.escape(req.query[obKey])}
+        })
+    )
+
+    const currentPage = escpQuery.page > 0 ? escpQuery.page - 1 : 0
+    const sortBy = escpQuery.sortBy || 'createdAt'
+    const orderBy = escpQuery.orderBy || 'asc'
     const sortQuery = {
         [sortBy]: orderBy
     }
 
-    const filter = req.query.filter || ''
-    const filterOn = req.query.filterOn || ''
+    const filter = escpQuery.filter || ''
+    const filterOn = escpQuery.filterOn || ''
     let filterQuery = {}
     if (filter.length > 0)
     {
@@ -44,7 +55,7 @@ router.get('/', (req, res, next) => {
                 .then(items => {
                     return res.status(200).json({
                         items,
-                        page: req.query.page || 1,
+                        page: escpQuery.page || 1,
                         total: itemCount,
                         pageSize: pageSize
                     })
@@ -58,7 +69,12 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/:id', (req, res, next) => {
-    Item.findOne({_id: req.params.id})
+    const userId = validator.scape(req.params.id)
+    if (!validator.isUUID(userId))
+    {
+        return res.status(400).json({msg: "Invalid Id"})
+    }
+    Item.findOne({_id: userId})
         .then(item =>{
             return res.status(200).json(item)
         })
