@@ -84,7 +84,6 @@ Content-Type: application/json
 }
 
 ###
-
 PUT http://127.0.0.1:3000/api/item/40e2061f-520e-448f-a131-60018f88ffe0 HTTP/1.1
 Content-Type: application/json
 
@@ -113,3 +112,26 @@ Content-Type: application/json
     "content": "aaaathe",
     "creator": "72ae8f1d-643b-483f-874b-2d48d0041183"
 }
+
+###
+POST http://127.0.0.1:3000/api/auth/local/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Pedro",
+    "password": "abcd"
+}
+
+###
+POST http://127.0.0.1:3000/api/auth/local/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "sara1232",
+    "password": "abcd"
+}
+
+###
+POST http://127.0.0.1:3000/api/auth/local/logout HTTP/1.1
+Content-Type: application/json
+Set-Cookie: Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIxNjVjYTliLWZkNDAtNDVmZS1iMDc5LTRiNDFjNDgwNWM0NCIsInVzZXJuYW1lIjoic2FyYTEyMzIiLCJpYXQiOjE1OTk3OTc3MzEsImV4cCI6MTU5OTk3MDUzMX0.movKzvxjUPNUMJY3yHhq8FaA-TgKycb0RNH2aYJbGPg
