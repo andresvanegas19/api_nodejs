@@ -118,16 +118,16 @@ POST http://127.0.0.1:3000/api/auth/local/signup HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "Pedro",
+    "username": "Pedros",
     "password": "abcd"
 }
 
 ###
-POST http://127.0.0.1:3000/api/auth/local/login HTTP/1.1
+POST https://0.0.0.0:80/api/auth/local/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "sara1232",
+    "username": "Pedros",
     "password": "abcd"
 }
 
